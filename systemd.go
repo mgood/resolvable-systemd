@@ -34,6 +34,13 @@ type templateArgs struct {
 	Address string
 }
 
+func getopt(name, def string) string {
+	if env := os.Getenv(name); env != "" {
+		return env
+	}
+	return def
+}
+
 func init() {
 	systemdConf := getopt("SYSTEMD_CONF_PATH", "/tmp/systemd")
 	resolver.HostResolverConfigs.Register(&SystemdConfig{
